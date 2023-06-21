@@ -1,0 +1,7 @@
+<div class="item item-avatar padding" style="padding-bottom: 20px !important;">
+        <img class="avatar" src="{{media+caster.photo}}" height="30" />
+        <h3 ui-sref="aprofile({id:caster.t_id})" style="margin-top: 12px !important;">
+                <b>{{caster.full_name || caster.first_name +' '+ caster.last_name}}</b> 
+                <b class="grey">@{{caster.user_name || '...'}}</b>
+        </h3>
+</div>

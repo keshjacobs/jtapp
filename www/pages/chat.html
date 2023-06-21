@@ -1,0 +1,89 @@
+<ion-view cache-view="true" class="bg-grey" ng-init="sink()">
+    <ion-nav-bar class="bar bar-light">
+        <ion-nav-title>
+          <div ng-if="chat.members.length > 0" style="margin-top:8px !important;"> 
+            <div ng-if="chat.members.length <= 2"  style="margin-top:-5px !important;" class="profile-photo2" ui-sref="aprofile({id:chatter(chat).t_id})" ng-style="{'background-image':'url('+media+chatter(chat).photo+')'}"></div>
+            <div style="margin-left: 30px !important;margin-top:8px !important;" ng-if="chat.members.length > 2">
+              <div class="group-photo2" ng-repeat="member in chat.members | limitTo:3" ng-style="{'background-image':'url('+media+member.user.photo+')'}"></div>
+            </div>
+            <h4 ui-sref="aprofile({id:chatter(chat).t_id})">{{chat.members.length > 2 ? (chat.title || 'Group'):chatter(chat).full_name}} <ion-spinner ng-if="playing_message.casting" icon="lines" class="now_spinner"></ion-spinner> </h4>
+         </div>
+          </ion-nav-title>
+      <ion-nav-buttons side="left">
+        <button class="button button-clear" ng-click="exit_chat()">
+        <i class="icon ion-ios-arrow-back dark"></i></button>
+      </ion-nav-buttons>
+
+
+      <ion-nav-buttons side="right">
+        <button class="button button-clear" ng-click="chat_detail_box.show()">
+        <i class="icon ion-more dark"></i></button>
+      </ion-nav-buttons>
+  
+  
+    </ion-nav-bar>
+  
+    <ion-content class="chat_board">
+      <ion-refresher pulling-text="Pull to refresh" on-refresh="get_chat(chat._id)"></ion-refresher>
+       
+      <ion-spinner ng-show="msg_loading" icon="crescent" class="listening"></ion-spinner>
+    
+      <div ng-show="messages.length < 1">
+        <div class=" text-center item item-light" style="border: none !important;box-shadow:none !important;">
+          <div class="padding">
+            <h2><b>No message sent yet.</b></h2>
+            <p>Be the first to break the ice.</p>
+          </div>
+        </div>
+      </div>
+  
+      <div ng-if="messages.length > 0">
+            <div ng-include="'components/message.html'" ng-repeat="cast in messages | unique:'date_created' | orderBy:'date_created'"></div>
+      </div>
+
+      <div class="gap"></div>
+
+    </ion-content>
+
+<ion-footer ng-if="!msg_loading" style="margin-bottom: 0px !important;">
+<div class="message_bar">
+  <ion-progress-bar ng-if="messaging" type="indeterminate"></ion-progress-bar>
+  <br>
+  <div class="padding text-center" ng-hide="is_blocked(chatter(chat)) || chatter(chat).block_list.indexOf(t_id) > -1" ng-if="(chat.members | filter:{accepted:true}).length <= 1">
+    <b>Wait for <b class="assertive">@{{chatter(chat).user_name}}</b> to accept request....</b>
+  </div>
+
+  <div class="padding text-center" ng-if="chatter(chat).block_list.indexOf(t_id) > -1">
+    <b><b class="assertive">@{{chatter(chat).user_name}}</b> has restricted/blocked you from sending messages</b>
+  </div>
+
+  <div class="padding text-center" ng-if="is_blocked(chatter(chat))">
+    <b> You have blocked <b class="assertive">@{{chatter(chat).user_name}}</b> from sending messages</b>
+  </div>
+
+
+  <div ng-class="file_added ? 'grey_bar':'transparent_bar2'" ng-hide="is_blocked(chatter(chat)) || chatter(chat).block_list.indexOf(t_id) > -1">
+    <div ng-if="(chat.members | filter:{accepted:true}).length > 1" style="margin-top: -33px !important;">
+      <div ng-hide="messaging" ng-include="'components/recorder.html'"></div>
+        <div class="row text-center" ng-hide="messaging || recording || !file_added" style="margin-top:-19px !important; padding: 10px !important;">
+          <button  ng-click="send_message(post)" class="button button-small col button-balanced">
+              Send
+          </button>
+          &nbsp;&nbsp;
+          <button ng-click="clear()" style="border: 2px solid !important;" class="button button-small col button-outline button-assertive">
+              Clear
+          </button>
+        </div>
+        <div class="text-center" ng-hide="!messaging">
+          <ion-spinner style="margin-top: 10px !important;" class="listening" icon="dots"></ion-spinner> 
+          <h5>Sending...</h5> 
+        </div>
+      <br><br>
+      <br><br>
+      <br><br>
+    </div>
+  </div>
+</div>
+</ion-footer>
+  </ion-view>
+  

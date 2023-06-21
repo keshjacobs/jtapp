@@ -1,0 +1,9 @@
+ <div class="pull-right" style="float: right !important;margin-top: 0px !important;">
+        <div ng-if="!cast.expired"> 
+            <button ng-disabled="!cast.cast || cast.expired || fetching_replies" ng-click="play_message(cast)" class="button button-clear button-small button-icon" ng-class="play_status(cast)">
+                <span ng-class="cast.casting ? 'ion-pause':'ion-play'" style="font-size: 26px !important;"></span>
+            </button>
+            <h6 ng-show="cast.casting" style="margin-top: -8px !important;" class="grey">&nbsp;&nbsp;{{(cast.casting ? cast.timeLeft:cast.duration) | number:0}}s</h6>
+          </div>
+        <a ng-if="cast.expired" ng-click="reward_message(cast)" class="button button-dark button-small">&nbsp;&nbsp;<i class="icon ion-refresh light"></i>&nbsp;  Watch Ad&nbsp;&nbsp;</a>
+</div>

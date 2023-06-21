@@ -1,0 +1,45 @@
+<ion-modal-view class="air"  ng-style="{'background-image':'url('+media+current_cast.caster.photo+')'}" >
+
+      <ion-header-bar class="bar tranny" ng-click="close_aircast()" ng-style="{'border':'1px solid '+color}">
+        <button title="close" ng-click="close_aircast()" class="button button-clear button-{{text_color}} button-icon">&nbsp;<i class="ion ion-chevron-down"></i>&nbsp;</button>          
+          <ion-title><b class="{{text_color}}">Now Playing</b></ion-title>
+        <!-- <button title="drop" ng-click="drop_aircast()" class="button button-clear button-{{text_color}} button-icon">&nbsp;<i class="ion ion-ios-close-empty"></i>&nbsp;</button>           -->
+       </ion-header-bar>
+    
+
+      <div class="tranny" ng-include src="'components/current_cast.html'"></div>
+
+      <ion-content class="text-left air_content" ng-style="{'background-color':color+' !important'}">
+      
+ 
+
+        <div ng-style="{'background-color':color}" ng-show="cast_replies.length > 0">
+          <div class="next-header" ng-style="{'background-color':color}">
+              <a ng-click="clear_replies()" class="pull-right {{text_color}}" style="float: right !important;text-decoration: underline;">Clear</a>
+              <b class="{{text_color}}">{{current_cast.reply ? "In":(current_cast.title || current_cast.caster.user_name+"'s")}} conversation ({{convo_track}}/{{cast_replies.length}})</b>
+          </div>  
+          <div ng-show="fetching_replies" class="text-center padding">
+              <ion-spinner icon="crescent"></ion-spinner> 
+              <small>Checking for conversations...</small>
+          </div>
+          <div ng-hide="fetching_replies">
+            <div ng-include ng-repeat="cast in cast_replies | limitTo:100:convo_track" src="'components/track-item.html'"></div>   
+          </div>
+         </div>
+
+
+
+
+            <div class="next-header"  ng-if="playlist.length > 1" ng-style="{'background-color':color}">
+              <b class="{{text_color}}">Up Next</b>
+            </div>
+
+            <ion-list class="{{text_color}} transparent">
+            
+                <div ng-include ng-repeat="cast in playlist | limitTo:30:(track+1)" src="'components/track-item.html'"></div>
+                  
+            </ion-list>
+
+      </ion-content>
+    </ion-modal-view>
+    

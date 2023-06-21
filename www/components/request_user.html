@@ -1,0 +1,13 @@
+<ion-item class="item-avatar">
+    <img ui-sref="aprofile({id:caster.t_id})" class="avatar" src="{{media+caster.photo}}" height="30" />
+    <div ng-if="caster.t_id!=user.t_id">
+        <button ng-click="select_user(caster)" ng-disabled="is_blocked(caster) || caster.block_list.indexOf(t_id) > -1" class="button button-balanced button-icon-right button-small pull-right" style="float: right !important;">
+            &nbsp;&nbsp; Request &nbsp;&nbsp;
+        </button> 
+    </div>
+    <h4 ui-sref="aprofile({id:caster.t_id})" style="margin-top: 12px !important;">
+    <b>{{caster.full_name || caster.first_name +' '+ caster.last_name}}</b>
+    <b class="grey">@{{caster.user_name || '...'}}</b>
+    </h4>
+     
+</ion-item>

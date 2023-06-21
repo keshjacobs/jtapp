@@ -1,0 +1,6 @@
+<div style="width:100vw !important;float: left;" class="list" ng-if="(trending_topics  | unique:'caster').length > 3">
+    <div class="item item-divider">
+        <h2><b>Top Picks</b></h2>
+     </div>
+     <div ng-include="'components/topic.html'" ng-repeat="topic in trending_topics | limitTo:8 | unique:'caster' track by $index"></div>
+</div>

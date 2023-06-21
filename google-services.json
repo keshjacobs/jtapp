@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "24173543292",
+    "firebase_url": "https://dtjt-32213.firebaseio.com",
+    "project_id": "dtjt-32213",
+    "storage_bucket": "dtjt-32213.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:24173543292:android:2502861c490fc465",
+        "android_client_info": {
+          "package_name": "com.something.ganik.justtalk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "24173543292-fp5jkqtncqpfjn0kpcmar11n53td4hsv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_yeZhz88dM_p1Pi36HfwR_fH9q4gl0bY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "24173543292-fp5jkqtncqpfjn0kpcmar11n53td4hsv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "24173543292-o1uhc0mhd47nn06ud27i6qo3imhf0rvk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ios.stickman"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

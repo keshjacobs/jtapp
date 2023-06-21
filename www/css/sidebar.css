@@ -1,0 +1,29 @@
+
+
+.menu-open .menu-content { 
+  background-color: rgba(0, 0, 0, 0.682) !important;
+  -webkit-transition: all 0.1s linear !important;
+  transition: all 0.1s linear !important;
+}
+
+
+.menu-open .menu,.menu-open ion-side-menu{
+  box-shadow: 200px 0px 205px rgba(26, 24, 24, 0.392) !important;
+  z-index: 100000 !important;
+  -webkit-transition: width 0.3s linear !important;
+  transition: left 0.3s ease !important;
+}
+
+ion-side-menu{
+  width:295px !important;
+}
+
+.menu{
+  background-color: rgba(244, 244, 244, 0.032) !important;
+  border:none !important;
+  -webkit-backdrop-filter: blur(80px) !important;
+  backdrop-filter: blur(80px) !important;
+      background-image: none !important;
+      -webkit-transition: width 0.3s linear !important;
+      transition: left 0.3s ease !important;
+}

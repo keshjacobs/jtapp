@@ -1,0 +1,9 @@
+<div class="item topic-case" ng-if="topic.title"  ng-if="profile.t_id!=user.t_id">
+    <div class="topic">
+      <div class="item-body transparent">
+        <div ng-include src="'components/topic_player.html'"></div>
+        <h2 ng-click="open_cast(topic)" style="font-size: 24px !important;margin: 0px !important;"><b>{{topic.title}}</b></h2>  
+      </div>
+      <div ng-include src="'components/narrated_by.html'" ng-init="caster = topic.caster"></div>
+    </div> 
+</div>

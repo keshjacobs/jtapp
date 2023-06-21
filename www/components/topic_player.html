@@ -1,0 +1,10 @@
+<div class="pull-right" style="float: right !important;margin-top:0px !important;">
+    <div ng-if="!topic.expired">
+
+       <button ng-disabled="!topic.cast || topic.expired" ng-click="play_cast(topic)" class="button button-clear button-dark button-small">
+          <span ng-class="topic.casting ? 'ion-pause':'ion-play'" style="font-size: 30px !important;"></span>
+       </button>
+       
+   </div>
+   <h6 ng-if="topic.expired" class="assertive">&nbsp;&nbsp;Expired</h6>
+</div>

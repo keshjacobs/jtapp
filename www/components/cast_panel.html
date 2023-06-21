@@ -1,0 +1,47 @@
+<div class="row panel" ng-if="!cast.recast">
+
+    <button ng-if="!cast.reply" ng-click="reply_cast(cast)" class="button button-small button-clear button-block button-icon-right"  ng-class="replied(cast) ? 'button-played':'button-dark'">
+      <span class="ion-reply"></span> {{cast.replies.length || 0}} 
+    </button>
+
+        <button ng-click="recast(cast)" ng-disabled="recasted(cast)" class="button button-small button-clear button-block button-icon-right" ng-class="recasted(cast) ? 'button-played':'button-dark'">
+            <span class="ion-refresh"></span>  {{cast.recasts.length || 0}}
+        </button>
+    
+
+        <button ng-click="like_cast(cast)" ng-class="liked(cast) ? 'button-assertive':'button-dark'" class="button button-small button-block button-clear button-icon-right ">
+           <span class="ion-heart"></span>  {{cast.likes.length || 0}} 
+        </button>
+   
+
+
+
+        <button title="button" ng-click="cast_more(cast)" class="button button-small button-clear button-block button-icon-right button-dark-green">
+            <span class="ion ion-more"></span>
+        </button>
+    
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,32 @@
+
+@font-face {
+  font-family: "Roboto";
+  font-weight: 400;
+  src: url("fonts/roboto/Roboto-Regular.ttf");
+}
+
+
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("fonts/Source_Sans_Pro/SourceSansPro-Regular.ttf");
+}
+
+
+
+@font-face {
+  font-family: "San Francisco";
+  src: url("fonts/SanFrancisco/san_francisco-webfont.woff");
+}
+
+
+
+*{
+  font-family: 'Roboto','serif';
+  /* font-family: 'San Francisco'; */
+   border:none;
+ }
+
+ small{
+  margin: 0px !important;
+  padding: 0px !important;
+ }

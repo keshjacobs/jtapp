@@ -1,0 +1,20 @@
+
+   <div class="row" style="width: 100% !important;background-color: transparent !important;float: left !important;height: 60px !important;">
+        <div class="col text-center">
+            <button ng-click="previous_cast()" ng-disabled="!track || (track <= 0)  || (playlist.length < 1) || !playlist || !current_cast.cast" class="button button-clear button-balanced button-icon">
+                <span class="icon ion-ios-rewind {{text_color}}" style="font-size: 22px !important;"></span>
+            </button>
+        </div>
+        <div class="col text-center"> 
+            <button ng-disabled="!current_cast.cast || current_cast.expired" ng-click="play_cast(current_cast)" class="button button-clear text-center button-balanced button-icon">
+                <span ng-class="current_cast.casting ? 'ion-pause':'ion-play'" class="icon {{text_color}}" style="font-size: 26px !important;"></span>
+            </button>
+        </div>
+        <div class="col text-center">
+            <button ng-click="next_cast()" ng-disabled="(track == (playlist.length-1)) || playlist.length < 1 || !playlist || !current_cast.cast" class="button button-clear button-balanced button-icon">
+                <span class="icon ion-ios-fastforward {{text_color}}" style="font-size: 22px !important;"></span>
+            </button>
+        </div>
+   </div>
+
+

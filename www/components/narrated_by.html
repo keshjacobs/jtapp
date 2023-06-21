@@ -1,0 +1,18 @@
+<div class="item" style="padding:0px !important;background-color: rgba(75, 73, 73, 0) !important;border: none !important;display: block !important;width: inherit !important;">
+    <br/>    
+    <h6 style="font-size: 11px !important;"><b>Narrated by</b></h6>
+        <div ng-if="caster.t_id!=user.t_id" style="margin-top: -5px !important;float: right !important;">
+
+            <button ng-class="subscribed(caster) ? 'button-outline button-dark':'button-assertive'" ng-click="subscribe(caster._id)" class="button button-icon-left button-small pull-right">
+                &nbsp;&nbsp;{{subscribed(caster) ? 'unsubscribe':'subscribe'}}&nbsp;&nbsp;
+            </button> 
+
+        </div>
+        <h4 ui-sref="aprofile({id:caster.t_id})" style="margin-top: 10px;">
+            {{caster.full_name || caster.first_name +' '+ caster.last_name}} 
+            <v class="oran">@{{caster.user_name || '...'}}</v>
+        </h4>
+        <div ng-if="caster.bio" style="float: left !important;margin-top:10px;" class="item item-body">
+            <b>{{caster.bio}}</b>
+        </div>
+    </div>

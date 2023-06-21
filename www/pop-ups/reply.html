@@ -1,0 +1,37 @@
+<ion-modal-view cache-view="false" class="bg-light">
+  <ion-header-bar class="bar bar-header bg-light">
+    <button title="close" ng-click="close_recorder()" ng-hide="recording"
+      class="button button-clear button-dark button-small dark">
+      &nbsp; <span class="ion ion-close-round"></span>&nbsp;
+    </button>
+    <ion-title><b>Reply</b></ion-title>
+  </ion-header-bar>
+
+  <ion-content class="text-center padding bg-white">
+
+      <div ng-include src="'components/post_cast.html'"></div>
+
+    <div ng-include="'components/recorder.html'"></div>
+
+    <div ng-show="file_added" class="padding">
+      <div ng-include="'components/mentioner.html'"></div>
+    </div>
+    <br>
+    <div ng-show="file_added">
+      <button ng-disabled="!file_added || post.casting" ng-click="post_cast(post)"
+        class="button button-block button-balanced">
+        Reply
+      </button>
+      <br/>
+      <br/>
+      <button ng-disabled="!file_added || post.casting" ng-click="clear()"
+        class="button button-block button-outline button-assertive">
+        Clear
+      </button>
+    </div>
+
+
+  </ion-content>
+
+
+</ion-modal-view>

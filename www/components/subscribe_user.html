@@ -1,0 +1,17 @@
+<div class="item item-avatar" style="padding-bottom: 20px !important;">
+            <img ui-sref="aprofile({id:caster.t_id})" class="avatar" src="{{media+caster.photo}}" height="30" />
+                <div ng-if="caster.t_id!=user.t_id" style="float: right !important;margin-right: 0px !important;">
+
+                    <button ng-class="subscribed(caster) ? 'button-outline':''" ng-click="subscribe(caster._id)" class="button button-assertive button-icon-left button-small pull-right">
+                        &nbsp;&nbsp;{{subscribed(caster) ? 'unsubscribe':'subscribe'}}&nbsp;&nbsp;
+                    </button> 
+
+                </div>
+            <h4 ui-sref="aprofile({id:caster.t_id})" style="margin-top: 12px !important;">
+                <b>{{caster.full_name || caster.first_name +' '+ caster.last_name}}</b> 
+                <b class="grey">@{{caster.user_name || '...'}}</b>
+            </h4>
+            <div ng-if="caster.bio" style="float: left !important;margin-top:1px;" class="item item-body">
+                <h5>{{caster.bio}}</h5>
+            </div>
+</div>

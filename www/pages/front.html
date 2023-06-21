@@ -1,0 +1,104 @@
+
+<ion-view cache-view="true">
+    <style>
+
+/* .tabs-striped .tab-item.tab-item-active{ */
+  /* border-top: 4px solid #f84e4e !important; */
+/* } */
+
+ .tabs{
+      opacity: 1;
+      height: 85px !important;
+      padding: 0px !important;
+      padding-top: 8px !important;
+      border: none !important;
+      font-size: 14px !important;
+  background-color: rgba(255, 255, 255, 0.416) !important;
+  border:none !important;
+  -webkit-backdrop-filter: blur(80px) !important;
+  backdrop-filter: blur(80px) !important;
+      background-image: none !important;
+}
+
+
+.tabs .tab-item{
+  color:rgb(0, 0, 0);
+  border: none !important;
+  font-size: 11px !important;
+  line-height: 5px !important;
+  opacity: 1 !important;
+}
+
+
+
+.tabs .tab-item .icon{
+  color: #000000;
+  font-size: 28px !important;
+  opacity: 1 !important;
+}
+
+
+
+
+
+
+.tabs .tab-item-active .icon{
+  color: #b64832;
+  opacity: 1 !important;
+}
+
+
+.tabs .tab-item-active{
+  color: #6e1705;
+}
+
+
+
+
+  </style>
+    <ion-tabs class="tabs-striped tab-light">
+      
+
+      <ion-tab  icon="ion-android-home" title="Home" href="#/front/talk">
+        <ion-nav-view name="front-talk"></ion-nav-view>
+      </ion-tab>
+
+
+    
+      <ion-tab  icon="ion-ios-search-strong" title="Explore"  href="#/front/find">
+        <ion-nav-view name="front-find"></ion-nav-view>
+      </ion-tab>
+
+      
+
+
+      <ion-tab icon="ion-ios-albums" title="Library" href="#/front/library">
+        <ion-nav-view name="front-library"></ion-nav-view>
+    </ion-tab>
+
+
+
+      <ion-tab title="Activity" badge="(notifications | filter:{seen:false}).length || 0" badge-style="badge-oran-alt" icon="ion-ios-bell" href="#/front/notification">
+        <ion-nav-view name="front-notification"></ion-nav-view>
+      </ion-tab>
+
+
+
+
+
+
+    <ion-tab badge="unheard()" title="Private" badge-style="badge-energized" icon="ion-android-mail" href="#/front/messages">
+      <ion-nav-view name="front-messages"></ion-nav-view>
+    </ion-tab>
+
+
+
+
+    </ion-tabs>
+
+
+
+</ion-view>
+
+
+    

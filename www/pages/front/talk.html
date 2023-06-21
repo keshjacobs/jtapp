@@ -1,0 +1,73 @@
+<ion-view cache-view="true" class="bg-white">
+    <ion-nav-bar class="bar" ng-hide="!t_id">
+                    <ion-nav-title>
+                        <b>{{greetings}}</b>
+                    </ion-nav-title>
+
+                    <ion-nav-buttons side="left">
+                        <img title="profile-photo2" side="left" menu-toggle="left"  ng-if="!user"  style="margin-top: 4px !important;" src="img/icon-green.png" class="bar-logo"/>
+                        <div ng-if="user" side="left" menu-toggle="left"  style="margin-top: 4px !important;" class="profile-photo2" ng-style="{'background-image':'url('+media+user.photo+')'}"></div>
+                    </ion-nav-buttons>
+                    
+                    <ion-nav-buttons side="right">
+                        &nbsp;&nbsp;&nbsp;
+                        <button ng-click="change_mode()" class="button button-sm button-clear" ng-class="!settings.dark_mode ? '':'grey'">
+                            <span class="icon" ng-class="!settings.dark_mode ? 'ion-ios-moon dark':'ion-ios-sunny'"></span>
+                        </button>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    </ion-nav-buttons>
+    </ion-nav-bar>
+   
+    <ion-content class="bg-grey" ng-class="home_loader ? ' edge_loader':''">
+
+       <ion-refresher pulling-text="Pull to refresh" on-refresh="new_feed()"></ion-refresher>
+
+       
+       <div ng-include src="'components/auth.html'"></div>
+
+
+            <ion-list ng-if="timeline.length > 0">
+                <div ng-include="'components/cast.html'" ng-show="!cast.reply_id" ng-repeat="cast in timeline | orderBy:'-date_created' track by $index">
+                </div>
+
+
+
+                <br/>
+
+                <br/>
+                <br/>
+                <br/>
+
+            </ion-list>
+
+
+        <div ng-if="timeline.length < 1" class="text-center padding">
+   
+            <br>
+            <br>
+            <h4><b>You don't have any new feed</b></h4>
+            <h5>Subscribe to a pod and listen to updates daily</h5>
+                <br>
+                <div class="text-center">
+                    <button ng-click="start_talk()" class="button button-small button-icon-left button-balanced">
+                        &nbsp;&nbsp;&nbsp;<span class="icon ion-plus"></span>&nbsp;
+                        Make your first cast&nbsp;&nbsp;&nbsp;
+                    </button>
+                    </div>
+            
+        
+        </div>
+        <div class="gap"></div>
+    </ion-content>
+
+    
+    <div ng-include src="'components/mic.html'"></div>
+    
+    <div ng-include src="'components/now_playing.html'"></div>
+
+  
+      
+  </ion-view>
+  
+  
+  

@@ -1,0 +1,54 @@
+<ion-view cache-view="false" ng-init="discovery()">
+
+    <ion-nav-bar class="bar" style="display:block;">
+      <ion-nav-buttons side="left">
+        <!-- <button class="button button-clear" back-button>
+          <i class="icon ion-ios-arrow-back assertive"></i></button> -->
+      </ion-nav-buttons>
+  
+          <ion-nav-buttons side="right">
+          <button ui-sref="set_photo" style="font-weight: bold;" class="button button-clear button-assertive">Next ></button>
+          </ion-nav-buttons>
+          <ion-nav-title>
+            <b>Get started</b>
+          </ion-nav-title>
+  
+  
+    </ion-nav-bar>
+   
+   
+    <ion-content class="padding text-left">
+        
+        <ion-refresher pulling-text="Pull to refresh" on-refresh="discovery()"></ion-refresher>
+  
+       
+        <div class="text-center padding">
+            <h4>Follow interesting casters and join the conversation</h4>
+            <h6>Pull down to refresh casters</h6>
+        </div>
+      
+     
+         <ion-list>
+          <div ng-show="!query && suggested_users.length > 0" class="list">
+            <div class="item item-divider">
+                <h2>Suggested for you</h2>
+             </div>
+            <div ng-include="'components/subscribe_user.html'" ng-repeat="caster in top_boys | unique:'t_id' | limitTo:20">
+            </div>
+        </div>
+          
+    
+        </ion-list>
+  
+  
+       
+  
+  <br><br><br>
+         
+      </ion-content>
+  
+  
+    </ion-view>
+    
+    
+    

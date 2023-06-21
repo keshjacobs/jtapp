@@ -1,0 +1,77 @@
+<ion-view cache-view="true" class="bg-grey">
+
+        <ion-nav-bar class="bar transparent">
+  
+                <ion-nav-title>
+                        <b>New request</b>
+                        </ion-nav-title>
+                        
+                          <ion-nav-buttons side="left">
+                                <button class="button button-clear" back-button nav-direction="back">
+                                        <i class="icon ion-ios-arrow-back dark"></i>
+                                </button>
+                        </ion-nav-buttons>
+    
+        <ion-nav-buttons side="right">
+             
+        </ion-nav-buttons>
+    
+        </ion-nav-bar>
+        
+        <div class="search-bar">
+                <label class="item item-input">
+                  <input type="text" ng-model="query" placeholder="Search for people"/>
+                  &nbsp;&nbsp;&nbsp; <span class="ion ion-ios-search-strong"></span>&nbsp;&nbsp;&nbsp;
+                </label>
+        </div>
+        <ion-content class="bg-white header-content" ng-init="get_contacts()">
+
+                <ion-refresher  icon="ion-loading-d" 
+                pulling-text="Pull to refresh"
+                on-refresh="get_contacts()">
+                    </ion-refresher>
+
+                <div class="text-center padding">
+                        <h5>Send a request to start a conversation</h5>
+                </div>
+
+
+
+<div ng-if="contact_loader" class="text-center padding">
+        <br>
+        <br>
+        <br>
+        <ion-spinner icon="crescent"></ion-spinner> 
+</div>
+
+
+
+
+<div ng-if="contact_list.length < 1" class="text-center padding">
+   
+        <br>
+        <br>
+        <h4><b>You don't have any contact</b></h4>
+        <h5>Subscribe to a pod to get in contact</h5>
+        <button ui-sref="front.find" class="button button-small button-icon-left button-balanced">
+                &nbsp;&nbsp;&nbsp;<span class="icon ion-ios-search-strong"></span>&nbsp;
+                Explore&nbsp;&nbsp;&nbsp;
+        </button>
+          
+</div>
+
+
+<div class="list">
+
+          
+            <div ng-include="'components/request_user.html'" ng-repeat="caster in contact_list | unique:'t_id' | filter:query">
+            </div>
+    
+               
+</div>
+                 
+                
+        
+<div class="gap"></div>
+          </ion-content>
+        </ion-view>

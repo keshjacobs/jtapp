@@ -1,0 +1,42 @@
+<ion-view  ng-init="search_box.hide()" cache-view="false">
+
+    <ion-nav-bar ng-style="{'background-color':profile_color+' !important;'}">
+      
+        <ion-nav-title class="text-center dark">
+          <b>{{profile.user_name || '...'}}</b>
+        </ion-nav-title> 
+        <ion-nav-buttons side="left">
+              <button title="back" ng-click="change_bar()" class="button button-clear button-dark" back-button>
+                <i class="icon ion-ios-arrow-back dark"></i>
+              </button>
+        </ion-nav-buttons>
+
+        <ion-nav-buttons side="right">
+          <button title="more" ng-disabled="!profile.t_id" ng-show="profile.t_id!=t_id" ng-click="profile_more(profile)" class="button button-clear">
+            <span class="icon ion-more dark"></span>
+          </button>
+        </ion-nav-buttons>
+        
+    </ion-nav-bar>
+    
+    <ion-content style="margin-top: -80px !important;height:110vh !important;padding-bottom: 30px !important;">
+            <ion-refresher pulling-text="Pull to refresh" on-refresh="fetch_profile(profile.t_id)"></ion-refresher>
+            <div>
+                <div ng-include src="'components/profile_card.html'"></div>
+                <div ng-include src="'components/profile_casts.html'"></div>
+            </div>
+     </ion-content>
+    
+    
+
+     <div ng-include src="'components/send.html'"></div>
+    
+    <div ng-include src="'components/now_playing.html'"></div>
+
+  
+      
+          
+    
+    </ion-view>
+    
+    

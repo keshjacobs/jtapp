@@ -1,0 +1,23 @@
+<div class="row" style="height: 40px !important;float:left !important;margin-top: 0px !important;">
+    <button  ng-if="!cast.recast.reply" ng-click="reply_cast(cast.recast)" class="button button-small button-block button-clear button-icon-left"  ng-class="replied(cast.recast) ? 'button-balanced':'button-dark-green'">
+       {{cast.recast.replies.length || 0}} <span class="ion-reply"></span>
+    </button>
+
+
+        <button ng-click="recast(cast.recast)" ng-disabled="recasted(cast.recast)" class="button button-small button-block button-clear button-icon-left" ng-class="recasted(cast.recast) ? 'button-balanced':'button-dark-green'">
+            <span class="ion-refresh"></span> {{cast.recast.recasts.length || 0}}
+        </button>
+
+
+        <button  ng-class="liked(cast.recast) ? 'button-assertive':'button-dark'" ng-click="like_cast()" class="button button-small button-block button-clear button-icon-left">
+             <span class="ion-heart"></span> {{cast.recast.likes.length || 0}}
+         </button>
+    
+
+
+        <button ng-click="share_cast(cast.recast)" class="button button-small button-block button-clear button-icon-left button-dark-green">
+            <span class="ion-ios-upload-outline"></span>
+        </button>
+
+
+</div>
