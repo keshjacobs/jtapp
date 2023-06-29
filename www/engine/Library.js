@@ -1,9 +1,10 @@
 app.run(function($ionicPlatform,Upload,socket,$cordovaMedia,$cordovaFileTransfer,$cordovaFile,$cordovaSocialSharing,$cordovaDeeplinks,$ionicActionSheet,$http,Chat,$ionicModal,$ionicLoading,Config,$localStorage,$timeout,$location,$rootScope,$ionicHistory,$state,$ionicScrollDelegate,account,cast,$sce,$ionicPopup){
   $rootScope.media = Config.media;
+  $rootScope.mediaStream = null;
   $rootScope.pages = 1;
   
   $rootScope.change_bar = function() {
-    if (StatusBar) {
+    if (typeof StatusBar !== 'undefined') {
       if (!$rootScope.settings.dark_mode) {
         StatusBar.styleDefault();
       } else {
@@ -126,6 +127,7 @@ $rootScope.next_message = function() {
 };
 
 $rootScope.play_audio = async function(audio) {
+  var audioContext = new (AudioContext || window.AudioContext)();
   var audio_data = $rootScope.post;
   if ($rootScope.playing_message && $rootScope.playing_message.casting) {
     audio_data = $rootScope.playing_message;
@@ -135,39 +137,21 @@ $rootScope.play_audio = async function(audio) {
   if (!audio_data.timeLeft) {
     audio_data.timeLeft = audio_data.duration || 0;
   }
-  let filePath = await $rootScope.downloadAudioFile(audio);
-  window.resolveLocalFileSystemURL(filePath, function(fileEntry) {
-    var fileURI = fileEntry.toURL();
-    const media = new Media(fileURI,
-      function onSuccess() {
-        $rootScope.source.started = true;
-        console.log('Audio playback started successfully.');
-        $rootScope.currentTime(audio_data);
-        if (audio_data.music) {
-          $rootScope.connect_music(audio_data.music, currenttime, 0.2);
-        }
-      },
-      function onError(error) {
-        console.log("Media playing error:", JSON.stringify(error));
-        if ($rootScope.playing_message) {
-          $rootScope.pause_message();
-        } else {
-          $rootScope.pause_cast();
-        }
-      },
-      function onStatus(status) {
-        console.log("Status for audio:");
-        console.log(status);
-        if (status === Media.MEDIA_STARTING) {
-          console.log("Seeking track...");
-          var currenttime = (parseInt(audio_data.duration) - parseInt(audio_data.timeLeft)) || 1;
-          media.seekTo(currenttime * 1000); // Convert to milliseconds
-        }
-        if (status === Media.MEDIA_STOPPED) {
-          console.log("Stopped track...");
+  var media = new Audio();
+  var source = audioContext.createMediaElementSource(media);
+  media.src = audio;
+  media.type = 'audio/wav';
+  music_source.crossOrigin = "anonymous";
+  music_source.autoplay = true;
+
+  // Ended event listener
+  media.addEventListener('ended', function() {
+    console.log("Stopped track...");
           if ($rootScope.Music && $rootScope.Music.stop) {
             $rootScope.Music.stop();
+            $rootScope.Music=undefined;
           }
+          $rootScope.source=undefined;
           if (audio_data.timeLeft <= 1) {
             audio_data.timeLeft = audio_data.duration;
             if ($rootScope.playing_message) {
@@ -176,14 +160,52 @@ $rootScope.play_audio = async function(audio) {
               $rootScope.next_cast();
             }
           }
-        }
-      }
-    );
-    console.log("Start playing...");
-    media.play({ playAudioWhenScreenIsLocked: true });
-    $rootScope.source = media;
   });
+
+  // Ended event listener
+  media.addEventListener('play', function() {
+  $rootScope.source.started = true;
+  console.log('Audio playback started successfully.');
+  $rootScope.currentTime(audio_data);
+  if (audio_data.music) {
+    $rootScope.connect_music(audio_data.music, currenttime, 0.2);
+  }
+});
+
+
+$rootScope.MediaControl = window.MediaControls.create({
+  track: audio_data.title || audio_data.full_name, // Set the title of the audio track
+  artist: audio_data.user_name, // Set the artist name
+  isPlaying: true, // Set the initial playback state
+  dismissible: true // Allow dismissing the media controls
+});
+// Event listener for pause event
+$rootScope.MediaControl.on('pause', function() {
+  $rootScope.pause_audio();
+});
+
+// Event listener for play event
+$rootScope.MediaControl.on('play', function() {
+  $rootScope.play_audio();
+});
+
+  var currenttime = (parseInt(audio_data.duration) - parseInt(audio_data.timeLeft)) || 1;
+  media.currentTime = currenttime;
+  source.connect(audioContext.destination);
+  // Play the audio
+  media.play();
+  if (media.start) {
+    media.start(0, currenttime);
+  } else if (media.play) {
+    media.play(0, currenttime);
+  } else if (media.noteOn) {
+    media.noteOn(0, currenttime);
+  }
+
+  $rootScope.MediaControl.show();
+  $rootScope.source = media;
 };
+
    
 $rootScope.connect_music = function(audio, ct, loudness) {
     var audioContext = new(window.AudioContext || window.webkitAudioContext)();
@@ -2394,7 +2416,9 @@ if (hour >= 5 && hour < 12) {
         $rootScope.refresh_profile();
       });
       
-      $rootScope.change_bar();
+      if (typeof StatusBar !== 'undefined') {
+        $rootScope.change_bar();
+      }
       
     $cordovaDeeplinks.route({
       '/cast/:id': {

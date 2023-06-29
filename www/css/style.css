@@ -427,6 +427,9 @@ hd-quality {  0% {
     -webkit-opacity: 3;
   }
 }
+#audio-player {
+  display: none;
+}
 
 
 .lodfa {

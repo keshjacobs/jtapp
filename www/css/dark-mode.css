@@ -12,7 +12,7 @@
 .transparent,.modal .track-item,.item-light{
   border: none !important;
 }
-.modal .tranny, .bar-light,.tabs-striped .tabs,.billboard{
+.modal .tranny, .bar-light,.tabs-striped .tabs{
     color:#fff !important;
     background-color: rgba(22, 22, 22, 0.37) !important;
     border:none !important;
@@ -27,7 +27,7 @@
 .modal .item-avatar{
   background-color: transparent !important;
 }
-ion-view .white_bar,ion-view .grey_bar,ion-view .bar,ion-view .item-avatar,.modal .bg-light{
+ion-view .white_bar,ion-view .grey_bar,ion-view .bar,ion-view .item-avatar,.modal .bg-light,.billboard,.blur_bg{
 color:#fff !important;
 background-color: rgba(36, 36, 36, 0.373) !important;
 border:none !important;
@@ -107,7 +107,7 @@ input,textarea{
 }
 
  ion-content .item-input,ion-modal-view .item-input,.item-input{
-  background-color: rgba(96, 96, 96, 0.865) !important;
+  background-color: #444 !important;
   color: #fff !important;
   padding: 15px !important;
   border-radius: 8px !important;
@@ -300,7 +300,3 @@ input,textarea{
   font-weight: bold !important;
 }
 
-
-.blur_bg{
-  background-color: #000 !important;
-}

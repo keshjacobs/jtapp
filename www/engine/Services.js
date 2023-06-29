@@ -201,7 +201,6 @@ app.service('fileUploadService', function ($http, $q) {
 app.factory('Mic', function($rootScope, $ionicPopup, $timeout, MediaDevices) {
   let audioContext = new (AudioContext || window.AudioContext)();
   let mediaRec = null;
-  let mediaStream = null;
 
   function count_down() {
     if ($rootScope.recording) {
@@ -242,59 +241,67 @@ app.factory('Mic', function($rootScope, $ionicPopup, $timeout, MediaDevices) {
     }, 1000);
   }
 
+
+  function startRecording() {
+    const chunks = [];
+    $rootScope.timer = 180;
+    $rootScope.recording = true;
+    const stop = this.stop;
+    mediaRec = new MediaRecorder($rootScope.mediaStream);
+    mediaRec.ondataavailable = function(e) {
+      chunks.push(e.data);
+    };
+    mediaRec.onstop = function() {
+      console.log("Stopped recording...");
+      let file = new Blob(chunks, { 'type': 'audio/wav' });
+      save_record(file);
+    };
+    mediaRec.onstart = function() {
+      console.log("Microphone started!");
+      count_down();
+      $timeout(function() {
+        stop();
+      }, $rootScope.timer * 1000);
+    };
+    mediaRec.start();
+  }
+
   return {
     rec: function() {
-      const chunks = [];
       const stop = this.stop;
-      $rootScope.timer = 180;
-      $rootScope.recording = true;
-      MediaDevices.getUserMedia({ audio: true, video: false }).then(function(stream) {
-        console.log("Microphone connected successfully........");
-        mediaStream = stream;
-        mediaRec = new MediaRecorder(mediaStream);
-        mediaRec.ondataavailable = function(e) {
-          chunks.push(e.data);
-        };
-        mediaRec.onstop = function() {
-          console.log("Stopped recording...");
-          let file = new Blob(chunks, { 'type': 'audio/wav' });
-          save_record(file);
-        };
-        mediaRec.onstart = function() {
-          console.log("Microphone started!");
-          count_down();
-          $timeout(function() {
-            stop();
-          }, $rootScope.timer * 1000);
-        };
-        mediaRec.start();
-      }).catch(function(err) {
-        $rootScope.recording = false;
-        $rootScope.file_added = false;
-        $ionicPopup.alert({ template: "Microphone failed to connect" });
-        console.log(err);
-        stop();
-      });
+      if ($rootScope.mediaStream) {
+        startRecording();
+      } else {
+        MediaDevices.getUserMedia({ audio: true, video: false }).then(function(stream) {
+          console.log("Microphone connected successfully........");
+          $rootScope.mediaStream = stream;
+          startRecording();
+        }).catch(function(err) {
+          $rootScope.recording = false;
+          $rootScope.file_added = false;
+          $ionicPopup.alert({ template: "Microphone failed to connect" });
+          console.log(err);
+          stop();
+        });
+      }
     },
 
     stop: function() {
       console.log("Stop................................");
       $rootScope.recording = false;
       $rootScope.messaging = false;
-    
-      if (mediaRec) {
-        mediaRec.stop();
-      }
-    
       if ($rootScope.source && $rootScope.source.stop) {
         $rootScope.source.stop();
       }
-    
-      if (mediaStream) {
-        mediaStream.getAudioTracks().forEach(function(track) {
-          track.stop();
-        });
-        mediaStream = null;
+      
+      // if ($rootScope.mediaStream) {
+      //   $rootScope.mediaStream.getAudioTracks().forEach(function(track) {
+      //     track.stop();
+      //   });
+      // }
+
+      if (mediaRec) {
+        mediaRec.stop();
       }
     
       $rootScope.post.filter = voice_filters[0];

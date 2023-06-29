@@ -76,6 +76,7 @@
     "cordova-plugin-ionic-webview": "^5.0.0",
     "cordova-plugin-keep-awake": "git+https://github.com/snuffy/cordova-plugin-keep-awake.git",
     "cordova-plugin-media": "^6.1.0",
+    "cordova-plugin-media-control": "^1.0.5",
     "cordova-plugin-music-controls2": "^3.0.7",
     "cordova-plugin-nativeaudio": "^3.0.9",
     "cordova-plugin-navigationbar-color": "^0.1.0",

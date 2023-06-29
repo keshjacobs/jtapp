@@ -78,6 +78,11 @@
 <ion-side-menu side="left" class="menu gloss">
 <ion-content ng-controller="profile"  style="margin-top: -4px !important;">
 
+  <audio id="audio-player" controls>
+    <source src="{{source.src}}" type="audio/wav">
+    Your browser does not support the audio element.
+  </audio>
+
     <div menu-close ng-include="'components/profile_card2.html'"></div>
 
     <ion-list>

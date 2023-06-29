@@ -4,13 +4,13 @@
     <div class="padding">
     
         <div class="text-left">
-            <div class="profile_photo_big" style="float:left !important;" ng-style="{'background-image':'url('+media+((restricted(profile) || is_blocked(profile)) ? 'photo/default.png':profile.photo)+')'}"></div>
-            <div class="padding" style="margin-left: 20px;">
+            <div class="profile_photo_big" style="float:left !important; display: block;" ng-style="{'background-image':'url('+media+((restricted(profile) || is_blocked(profile)) ? 'photo/default.png':profile.photo)+')'}"></div>
+            <div style="margin-left: 10px;margin-top: 10px; display: block; float: left;height: auto;width: 60%;" class="text-left light">
                 <h3 ng-if="profile.t_id" style="margin-bottom: 10px;">
-                    <b class="light">{{profile.full_name || profile.first_name + ' ' + profile.last_name}}</b>  <span ng-if="profile.verified" class="ion ion-checkmark-circled assertive"></span>
+                    <b>{{profile.full_name || profile.first_name + ' ' + profile.last_name}}</b>  <span ng-if="profile.verified" class="ion ion-checkmark-circled assertive"></span>
                 </h3>
                 <!-- <h5 style="margin-top: -10px;"><b class="light">@{{profile.user_name || '...'}}</b></h5> -->
-                <div class="text-left light" ng-if="profile.user_name">
+                <div ng-if="profile.user_name">
                     <b>
                     {{profile.casts.length || profile_casts.length || 0 | number}}&nbsp;&nbsp;
                     </b>
