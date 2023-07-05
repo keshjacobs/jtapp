@@ -179,6 +179,7 @@ $rootScope.MediaControl = window.MediaControls.create({
   isPlaying: true, // Set the initial playback state
   dismissible: true // Allow dismissing the media controls
 });
+$rootScope.MediaControl.setAudioMode("speaker");
 // Event listener for pause event
 $rootScope.MediaControl.on('pause', function() {
   $rootScope.pause_audio();
