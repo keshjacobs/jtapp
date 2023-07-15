@@ -65,7 +65,7 @@
     "cordova-android-firebase-gradle-release": "^4.0.0",
     "cordova-android-play-services-gradle-release": "^4.0.0",
     "cordova-browser": "^6.0.0",
-    "cordova-ios": "^6.2.0",
+    "cordova-ios": "^6.3.0",
     "cordova-plugin-admob-free": "^0.27.0",
     "cordova-plugin-advanced-background-mode": "^1.1.1",
     "cordova-plugin-android-permissions": "^1.1.5",
@@ -256,11 +256,15 @@
       "cordova-plugin-admob-free": {
         "ADMOB_APP_ID": "ca-app-pub-8004122002631398~8860479029"
       },
-      "cordova-plugin-media-controls": {}
+      "cordova-plugin-media-controls": {},
+      "cordova-admob-sdk": {
+        "PLAY_SERVICES_VERSION": "11.0.1"
+      }
     },
     "platforms": [
       "browser",
-      "android"
+      "android",
+      "ios"
     ]
   }
 }
