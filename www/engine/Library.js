@@ -137,74 +137,66 @@ $rootScope.play_audio = async function(audio) {
   if (!audio_data.timeLeft) {
     audio_data.timeLeft = audio_data.duration || 0;
   }
-  var media = new Audio();
-  var source = audioContext.createMediaElementSource(media);
-  media.src = audio;
-  media.type = 'audio/wav';
-  music_source.crossOrigin = "anonymous";
-  music_source.autoplay = true;
-
-  // Ended event listener
-  media.addEventListener('ended', function() {
-    console.log("Stopped track...");
-          if ($rootScope.Music && $rootScope.Music.stop) {
-            $rootScope.Music.stop();
-            $rootScope.Music=undefined;
-          }
-          $rootScope.source=undefined;
-          if (audio_data.timeLeft <= 1) {
-            audio_data.timeLeft = audio_data.duration;
-            if ($rootScope.playing_message) {
-              $rootScope.next_message();
-            } else {
-              $rootScope.next_cast();
-            }
-          }
-  });
-
-  // Ended event listener
-  media.addEventListener('play', function() {
-  $rootScope.source.started = true;
-  console.log('Audio playback started successfully.');
-  $rootScope.currentTime(audio_data);
-  if (audio_data.music) {
-    $rootScope.connect_music(audio_data.music, currenttime, 0.2);
-  }
-});
-
-
-$rootScope.MediaControl = window.MediaControls.create({
-  track: audio_data.title || audio_data.full_name, // Set the title of the audio track
-  artist: audio_data.user_name, // Set the artist name
-  isPlaying: true, // Set the initial playback state
-  dismissible: true // Allow dismissing the media controls
-});
-$rootScope.MediaControl.setAudioMode("speaker");
-// Event listener for pause event
-$rootScope.MediaControl.on('pause', function() {
-  $rootScope.pause_audio();
-});
-
-// Event listener for play event
-$rootScope.MediaControl.on('play', function() {
-  $rootScope.play_audio();
-});
-
   var currenttime = (parseInt(audio_data.duration) - parseInt(audio_data.timeLeft)) || 1;
-  media.currentTime = currenttime;
-  source.connect(audioContext.destination);
-  // Play the audio
-  media.play();
-  if (media.start) {
-    media.start(0, currenttime);
-  } else if (media.play) {
-    media.play(0, currenttime);
-  } else if (media.noteOn) {
-    media.noteOn(0, currenttime);
-  }
+  $rootScope.MediaControl = window.MediaControls.create({
+    track: audio_data.title || audio_data.full_name, // Set the title of the audio track
+    artist: audio_data.user_name, // Set the artist name
+    isPlaying: true, // Set the initial playback state
+    dismissible: true // Allow dismissing the media controls
+  });
+  $rootScope.MediaControl.setAudioMode("speaker");
+  $rootScope.MediaControl.on('play', function() {
+    $rootScope.play_audio();
+  });
+  $rootScope.MediaControl.on('pause', function() {
+    $rootScope.pause_audio();
+  });
+  // Load the audio file using an XMLHttpRequest
+  var request = new XMLHttpRequest();
+  request.open('GET', audio, true);
+  request.responseType = 'arraybuffer';
+  request.onload = function() {
+    var audioData = request.response;
+    audioContext.decodeAudioData(audioData, function(buffer) {
+      // Create a new AudioBufferSourceNode
+      var source = audioContext.createBufferSource();
+      source.buffer = buffer;
+      source.type = 'audio/wav';
+      source.connect(audioContext.destination);
 
-  $rootScope.MediaControl.show();
-  $rootScope.source = media;
+      // Ended event listener
+      source.addEventListener('ended', function() {
+        console.log("Stopped track...");
+        if ($rootScope.Music && $rootScope.Music.stop) {
+          $rootScope.Music.stop();
+          $rootScope.Music = undefined;
+        }
+        $rootScope.source = undefined;
+        if (audio_data.timeLeft <= 1) {
+          audio_data.timeLeft = audio_data.duration;
+          if ($rootScope.playing_message) {
+            $rootScope.next_message();
+          } else {
+            $rootScope.next_cast();
+          }
+        }
+      });   
+      source.addEventListener('play', function() {
+        console.log('Audio playback started successfully.');
+        $rootScope.currentTime(audio_data);
+        $rootScope.source.started = true;
+        
+        if (audio_data.music) {
+          $rootScope.connect_music(audio_data.music, currenttime, 0.2);
+        }
+      });   
+      source.connect(audioContext.destination);
+      source.start(0);
+        $rootScope.MediaControl.show();
+        $rootScope.source = media;
+    });
+  };
+  request.send();
 };
 
    
@@ -237,7 +229,7 @@ $rootScope.connect_music = function(audio, ct, loudness) {
   $rootScope.pause_audio = function() {
     if ($rootScope.source.started) {
       $rootScope.source.started = false;
-      $rootScope.source.pause();
+      $rootScope.source.stop();
       if ($rootScope.Music.stop) {
         $rootScope.Music.stop();
       }
