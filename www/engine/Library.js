@@ -1,4 +1,4 @@
-app.run(function($ionicPlatform,Upload,socket,$cordovaMedia,$cordovaFileTransfer,$cordovaFile,$cordovaSocialSharing,$cordovaDeeplinks,$ionicActionSheet,$http,Chat,$ionicModal,$ionicLoading,Config,$localStorage,$timeout,$location,$rootScope,$ionicHistory,$state,$ionicScrollDelegate,account,cast,$sce,$ionicPopup){
+app.run(function($ionicPlatform,Upload,socket,$cordovaFileTransfer,$cordovaFile,$cordovaSocialSharing,$cordovaDeeplinks,$ionicActionSheet,$http,Chat,$ionicModal,$ionicLoading,Config,$localStorage,$timeout,$location,$rootScope,$ionicHistory,$state,$ionicScrollDelegate,account,cast,$sce,$ionicPopup){
   $rootScope.media = Config.media;
   $rootScope.mediaStream = null;
   $rootScope.pages = 1;
@@ -65,6 +65,40 @@ app.run(function($ionicPlatform,Upload,socket,$cordovaMedia,$cordovaFileTransfer
   $rootScope.track = 0;
   $rootScope.convo_track = 0;
 
+
+  $rootScope.audio_events = function(action) {
+    const message = JSON.parse(action).message;
+    switch(message) {
+      case 'music-controls-next':  
+      if ($rootScope.playing_message) {
+        $rootScope.next_message();
+      } else {
+        $rootScope.next_cast();
+      }
+        break;
+      case 'music-controls-previous':
+        if ($rootScope.playing_message) {
+          $rootScope.previous_message();
+        } else {
+          $rootScope.previous_cast();
+        }
+        break;
+      case 'music-controls-pause':
+        $rootScope.pause_audio();
+        break;
+        case 'music-controls-seek-to':
+        const seekToInSeconds = JSON.parse(action).position;
+        MusicControls.updateElapsed({
+          elapsed: seekToInSeconds,
+          isPlaying: true
+        });
+        break;
+      default:
+        break;
+    }
+  }
+  
+
   $ionicModal.fromTemplateUrl('pop-ups/record.html', {
     scope: $rootScope,
     animation: 'slide-in-up'
@@ -126,6 +160,20 @@ $rootScope.next_message = function() {
   }, 1000);
 };
 
+$rootScope.PlayBar = function(audio_data){
+  $timeout(function() {
+  if($rootScope.MediaControls){
+    $rootScope.MediaControls.create({
+      track: audio_data.title || audio_data.full_name, // Set the title of the audio track
+      artist: audio_data.user_name, // Set the artist name
+      isPlaying: true, // Set the initial playback state
+    });
+}
+$rootScope.MediaControls.subscribe($rootScope.audio_events);
+$rootScope.MediaControls.listen();
+}, 3000);
+}
+
 $rootScope.play_audio = async function(audio) {
   var audioContext = new (AudioContext || window.AudioContext)();
   var audio_data = $rootScope.post;
@@ -138,65 +186,55 @@ $rootScope.play_audio = async function(audio) {
     audio_data.timeLeft = audio_data.duration || 0;
   }
   var currenttime = (parseInt(audio_data.duration) - parseInt(audio_data.timeLeft)) || 1;
-  $rootScope.MediaControl = window.MediaControls.create({
-    track: audio_data.title || audio_data.full_name, // Set the title of the audio track
-    artist: audio_data.user_name, // Set the artist name
-    isPlaying: true, // Set the initial playback state
-    dismissible: true // Allow dismissing the media controls
-  });
-  $rootScope.MediaControl.setAudioMode("speaker");
-  $rootScope.MediaControl.on('play', function() {
-    $rootScope.play_audio();
-  });
-  $rootScope.MediaControl.on('pause', function() {
-    $rootScope.pause_audio();
-  });
-  // Load the audio file using an XMLHttpRequest
-  var request = new XMLHttpRequest();
-  request.open('GET', audio, true);
-  request.responseType = 'arraybuffer';
-  request.onload = function() {
-    var audioData = request.response;
-    audioContext.decodeAudioData(audioData, function(buffer) {
-      // Create a new AudioBufferSourceNode
+  
+  try {
+    const response = await fetch(audio);
+    const audioData = await response.arrayBuffer();
+    const buffer = await audioContext.decodeAudioData(audioData);
+    
+    if (buffer) {
       var source = audioContext.createBufferSource();
       source.buffer = buffer;
       source.type = 'audio/wav';
+      source.crossOrigin = "anonymous";
       source.connect(audioContext.destination);
-
+      
       // Ended event listener
-      source.addEventListener('ended', function() {
+      source.onended = function() {
         console.log("Stopped track...");
+        
         if ($rootScope.Music && $rootScope.Music.stop) {
           $rootScope.Music.stop();
           $rootScope.Music = undefined;
         }
-        $rootScope.source = undefined;
+        
         if (audio_data.timeLeft <= 1) {
           audio_data.timeLeft = audio_data.duration;
+          
           if ($rootScope.playing_message) {
             $rootScope.next_message();
           } else {
             $rootScope.next_cast();
           }
         }
-      });   
-      source.addEventListener('play', function() {
-        console.log('Audio playback started successfully.');
-        $rootScope.currentTime(audio_data);
-        $rootScope.source.started = true;
-        
-        if (audio_data.music) {
-          $rootScope.connect_music(audio_data.music, currenttime, 0.2);
-        }
-      });   
-      source.connect(audioContext.destination);
+      };
+      
       source.start(0);
-        $rootScope.MediaControl.show();
-        $rootScope.source = media;
-    });
-  };
-  request.send();
+      console.log('Audio playback started successfully.');
+      $rootScope.source.started = true;
+      $rootScope.source = source;
+      $rootScope.currentTime(audio_data);
+      $rootScope.PlayBar(audio_data);
+      
+      if (audio_data.music) {
+        $rootScope.connect_music(audio_data.music, currenttime, 0.2);
+      }
+    } else {
+      console.log("Buffer not loaded!");
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
 };
 
    
@@ -230,6 +268,9 @@ $rootScope.connect_music = function(audio, ct, loudness) {
     if ($rootScope.source.started) {
       $rootScope.source.started = false;
       $rootScope.source.stop();
+      if($rootScope.MediaControls){
+        $rootScope.MediaControls.updateIsPlaying(false);
+      }
       if ($rootScope.Music.stop) {
         $rootScope.Music.stop();
       }
@@ -2393,10 +2434,14 @@ if (hour >= 5 && hour < 12) {
 
 
    $ionicPlatform.ready(function() {
-    document.body.addEventListener('click', $rootScope.unlock_media);
-    document.body.addEventListener('touchstart',$rootScope.unlock_media);
-    document.body.addEventListener('touchend',$rootScope.unlock_media);
-      
+      document.body.addEventListener('click', $rootScope.unlock_media);
+      document.body.addEventListener('touchstart',$rootScope.unlock_media);
+      document.body.addEventListener('touchend',$rootScope.unlock_media);
+
+      cordova.plugins.backgroundMode.enable();
+
+      $rootScope.MediaControls = MusicControls || window.MusicControls || window.MediaControls || MediaControls;
+
       socket.on('message',function(data){
         $rootScope.get_messages();
         if($rootScope.chat){
