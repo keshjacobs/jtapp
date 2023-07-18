@@ -219,12 +219,12 @@ $rootScope.play_audio = async function(audio) {
         }
       };
       
-      source.start(0);
-      console.log('Audio playback started successfully.');
-      $rootScope.source.started = true;
       $rootScope.source = source;
       $rootScope.currentTime(audio_data);
       $rootScope.PlayBar(audio_data);
+      $rootScope.source.started = true;
+      $rootScope.source.start(0,currenttime);
+      console.log('Audio playback started successfully.');
       
       if (audio_data.music) {
         $rootScope.connect_music(audio_data.music, currenttime, 0.2);
@@ -268,6 +268,7 @@ $rootScope.connect_music = function(audio, ct, loudness) {
     if ($rootScope.source.started) {
       $rootScope.source.started = false;
       $rootScope.source.stop();
+
       if($rootScope.MediaControls){
         $rootScope.MediaControls.updateIsPlaying(false);
       }
@@ -1210,9 +1211,9 @@ $rootScope.save_cast=function(cast){
           $timeout(function(){
             $rootScope.hide(); 
             $rootScope.record_box.hide();
-            $rootScope.play_sound("popup.wav");
             $rootScope.recast_box.hide();
             $rootScope.reply_box.hide();
+            $rootScope.toast("saved!",true);
             $rootScope.pause_cast();
             $rootScope.clear();
           },3000);
@@ -1381,6 +1382,7 @@ $rootScope.upload_cast=function(c){
             $rootScope.file=null;
             $rootScope.messaging=false;
             $rootScope.post.file=null;
+            $rootScope.toast("cleared",true);
           },1000);
           $rootScope.messaging=false;
           $rootScope.file=null;
