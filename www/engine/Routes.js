@@ -199,6 +199,18 @@ app.config(function($stateProvider, $urlRouterProvider,Config,$ionicConfigProvid
       }
     })
 
+    .state('front.notifications', {
+      url: '/notifications',
+      cache: true,
+      views: {
+        'front-talk': {
+          templateUrl: 'pages/front/notification.html',
+          controller:"profile"
+        }
+      }
+    })
+
+
     .state('front.library', {
       url: '/library',
       cache: true,
@@ -208,6 +220,14 @@ app.config(function($stateProvider, $urlRouterProvider,Config,$ionicConfigProvid
           controller:"Cast"
         }
       }
+    })
+
+
+    .state('notifications', {
+      url: '/notifications',
+      cache: true,
+      templateUrl: 'pages/front/notification.html',
+      controller:"profile"
     })
 
     .state('chat', {

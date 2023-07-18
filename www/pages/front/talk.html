@@ -5,14 +5,21 @@
                     </ion-nav-title>
 
                     <ion-nav-buttons side="left">
-                        <img title="profile-photo2" side="left" menu-toggle="left"  ng-if="!user"  style="margin-top: 4px !important;" src="img/icon-green.png" class="bar-logo"/>
+                        <img title="profile-photo2" ui-sref="auth"  ng-if="!user"  style="margin-top: 4px !important;" src="img/icon-green.png" class="bar-logo"/>
                         <div ng-if="user" side="left" menu-toggle="left"  style="margin-top: 4px !important;" class="profile-photo2" ng-style="{'background-image':'url('+media+user.photo+')'}"></div>
                     </ion-nav-buttons>
                     
                     <ion-nav-buttons side="right">
                         &nbsp;&nbsp;&nbsp;
-                        <button ng-click="change_mode()" class="button button-sm button-clear" ng-class="!settings.dark_mode ? '':'grey'">
+                        <!-- <button ng-click="change_mode()" class="button button-sm button-clear" ng-class="!settings.dark_mode ? '':'grey'">
                             <span class="icon" ng-class="!settings.dark_mode ? 'ion-ios-moon dark':'ion-ios-sunny'"></span>
+                        </button> -->
+                        <button ui-sref="front.notifications" class="button button-sm button-clear">
+                        
+                            <div ng-show="(notifications | filter:{seen:false}).length > 0" class="badge badge-energized" style="position: absolute;">
+                                {{(notifications | filter:{seen:false}).length || 0}}
+                            </div>
+                            <span class="icon ion-ios-bell"></span>
                         </button>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     </ion-nav-buttons>

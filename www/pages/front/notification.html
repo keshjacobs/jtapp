@@ -8,11 +8,14 @@
               <b>Activity</b>
         </ion-nav-title>
         
-        <ion-nav-buttons side="left" menu-toggle="left">
+        <!-- <ion-nav-buttons side="left" menu-toggle="left">
           <img ng-if="!user" src="img/icon-green.png" style="margin-top: 4px !important;" class="bar-logo"/>
           <div ng-if="user" menu-toggle="left" class="profile-photo2" style="margin-top: 4px !important;" ng-style="{'background-image':'url('+media+user.photo+')'}"></div>
-      </ion-nav-buttons>
-      
+      </ion-nav-buttons> -->
+      <ion-nav-buttons side="left">
+        <button title="back" class="button button-clear" back-button>
+          <i class="icon ion-ios-arrow-back dark"></i></button>
+        </ion-nav-buttons>
         
         <ion-nav-buttons side="right">
             
