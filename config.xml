@@ -270,7 +270,7 @@
         <variable name="ANDROID_SUPPORT_V4_VERSION" value="24.1.1+" />
     </plugin>
     <plugin name="cordova-admob-sdk" spec="../plugins/cordova-admob-sdk">
-        <variable name="PLAY_SERVICES_VERSION" value="11.0.1" />
+        <variable name="PLAY_SERVICES_VERSION" value="18.0.0" />
     </plugin>
     <plugin name="cordova-plugin-statusbar" spec="git+https://github.com/apache/cordova-plugin-statusbar.git" />
     <plugin name="cordova-plugin-inappbrowser" spec="^3.2.0" />
