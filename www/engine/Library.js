@@ -2590,7 +2590,6 @@ var request_notification=new Promise((resolve, reject) => {
   
 
 
-
   var request_microphone=new Promise((resolve, reject) => {
     cordova.plugins.diagnostic.isMicrophoneAuthorized(function(isEnabled){
         if(!isEnabled){
