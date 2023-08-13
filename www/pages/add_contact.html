@@ -34,7 +34,7 @@
           </div>
 
       <div class="list">
-        <ion-radio ng-model="selected_contact" ng-value="contact" ng-change="select_contact(contact)" class="item item-avatar item-light" ng-repeat="contact in contacts | limitTo:6">
+        <ion-radio ng-model="selected_contact" ng-value="contact" ng-change="select_contact(contact)" class="item item-avatar item-light" ng-repeat="contact in contacts | limitTo:6  track by $index">
              <img src="img/dp.png">
               <b>{{contact.first_name | capitalize}} {{contact.last_name | capitalize}}</b><br>
               <small>{{contact.email}}</small><br>

@@ -2092,7 +2092,7 @@ display: none;
 
 .profile_header{ 
   width:100% !important;
-  min-height:380px;
+  min-height:320px;
   height: auto;
   background-size:130%;
   background-color: rgb(26, 26, 26);

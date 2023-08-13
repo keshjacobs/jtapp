@@ -10,7 +10,7 @@
 
     <ion-content class="text-left bg-light" style="margin-top: 0px !important;">
         <br>
-        <div ng-include="'components/music.html'" ng-repeat="music in songs">
+        <div ng-include="'components/music.html'" ng-repeat="music in songs track by $index">
         </div>
 
 

@@ -21,7 +21,7 @@
                 <h5 class="dark">{{user_results.length || 0 | number}} found</h5>
             </div>
 
-            <div  ng-repeat="caster in user_results" ng-include="'components/mention.html'">
+            <div  ng-repeat="caster in user_results track by $index" ng-include="'components/mention.html'">
             </div>
 
             <br><br><br>

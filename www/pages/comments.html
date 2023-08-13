@@ -22,7 +22,7 @@
     </div>
 
     <div class="list">
-      <div class="item item-avatar-left" ng-repeat="comment in apa.comments | orderBy:'-date'">
+      <div class="item item-avatar-left" ng-repeat="comment in apa.comments | orderBy:'-date' track by $index">
               <div ng-if="comment.j_id==user.j_id">
               <div  style="float: right; color: #2f2f2f;" href="" ng-click="delete_comment(comment)">
               <i class="ti ti-close dark"></i>

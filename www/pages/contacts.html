@@ -32,7 +32,7 @@
 
                      <div ng-if="user.contacts.length > 0">
 
-                         <div class="item text-left padding" ng-repeat="contact in user.contacts">
+                         <div class="item text-left padding" ng-repeat="contact in user.contacts track by $index">
                              <b>{{contact.first_name | capitalize}} {{contact.last_name | capitalize}}</b><br>  
                             <small><h5>{{contact.phone}}</h5></small>  <br>
                             <button class="button button-sm assertive button-long button-full pull-right" style="float:right !important;" ng-click="delete_contact(contact)">

@@ -3,7 +3,7 @@
     <div class="item item-divider">
         <h5>Updates</h5>
      </div>
-        <div ng-include="'components/cast.html'" ng-repeat="cast in timeline | orderBy:'-date_created'">
+        <div ng-include="'components/cast.html'" ng-repeat="cast in timeline | orderBy:'-date_created' track by _id">
         </div>
 </div>
 <div ng-if="timeline.length < 1" class="text-center padding">

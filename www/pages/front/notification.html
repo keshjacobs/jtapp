@@ -29,7 +29,7 @@
 
     <ion-list ng-if="t_id">
      
-      <div ng-include src="'components/notification.html'" ng-repeat="note in notifications | orderBy:'-date_created' | limitTo:30"></div>
+      <div ng-include src="'components/notification.html'" ng-repeat="note in notifications | orderBy:'-date_created' | limitTo:30 track by $index"></div>
       
       
       <div ng-if="!notifications || notifications.length < 1" class="padding">

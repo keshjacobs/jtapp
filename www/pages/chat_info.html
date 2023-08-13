@@ -25,7 +25,7 @@
         <span class="icon ti-plus"></span> Add member
          </div>
 
-            <div ng-include="'components/subscribe_user.html'" ng-repeat="caster in chat.members">
+            <div ng-include="'components/subscribe_user.html'" ng-repeat="caster in chat.members  track by $index">
             </div>
     
                                 

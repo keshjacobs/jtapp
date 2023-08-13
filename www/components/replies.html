@@ -12,7 +12,7 @@
                <b>{{cast_replies.length || 0 | number}} {{cast_replies.length > 1 ? 'replies':'reply'}}</b>
           </div>
 
-          <div  ng-include="'components/cast3.html'" ng-repeat="cast in cast_replies | orderBy:'-date_created'">
+          <div  ng-include="'components/cast3.html'" ng-repeat="cast in cast_replies | orderBy:'-date_created' track by $index">
           </div>
 
      </div>

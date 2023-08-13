@@ -32,9 +32,9 @@
                         <h5 class="dark">{{search_results || 0 | number}} results</h5>
                     </div>
 
-                    <div  ng-repeat="caster in user_results" ng-include="'components/subscribe_user.html'">
+                    <div  ng-repeat="caster in user_results track by $index" ng-include="'components/subscribe_user.html'">
                     </div>
-                    <div  ng-repeat="cast in cast_results" ui-sref="cast({cast_id:cast._id})" ng-include="'components/cast.html'"> 
+                    <div  ng-repeat="cast in cast_results track by $index" ui-sref="cast({cast_id:cast._id})" ng-include="'components/cast.html'"> 
                     </div>
             
             </div>

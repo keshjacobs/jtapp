@@ -10,7 +10,7 @@
 
     <ion-content class="text-left bg-light" style="margin-top: 0px !important;">
         <br>
-        <div ng-include="'components/voice.html'" ng-repeat="voice in voice_filters">
+        <div ng-include="'components/voice.html'" ng-repeat="voice in voice_filters track by $index">
         </div>
 
 

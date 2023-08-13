@@ -70,7 +70,7 @@
             </div>
 
             <ion-list>
-            <div ng-include="'components/chat.html'" ng-repeat="chat in chats | filter:srch_msg | orderBy:'-last_modified' | unique:'_id'"></div>
+            <div ng-include="'components/chat.html'" ng-repeat="chat in chats | filter:srch_msg | orderBy:'-last_modified' | unique:'_id' track by $index"></div>
             </ion-list>
 
 

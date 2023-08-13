@@ -4,7 +4,7 @@
 </div>
 <ion-scroll direction="x" class="myScroll">
         <div style="width:1000px !important;">
-            <div ng-include="'components/face.html'" ng-repeat="user in top_boys  | unique:'t_id' | limitTo:8"></div>
+            <div ng-include="'components/face.html'" ng-repeat="user in top_boys  | unique:'t_id' | limitTo:8 track by $index"></div>
         </div>
  </ion-scroll>    
 </div>

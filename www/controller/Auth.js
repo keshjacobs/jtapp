@@ -2,11 +2,16 @@ app.controller('Auth', function($scope,$state,$http,account,$timeout,$ionicPopup
 
 var ip=null;
 $rootScope.counter=59;
+try{
 
   $http.get("https://ipinfo.io/json").then(function (response) 
   {
     ip = response.data.ip;
   });
+} catch (e){
+
+}
+
 
 
 

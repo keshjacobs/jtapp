@@ -64,7 +64,7 @@
 <div class="list">
 
           
-            <div ng-include="'components/request_user.html'" ng-repeat="caster in contact_list | unique:'t_id' | filter:query">
+            <div ng-include="'components/request_user.html'" ng-repeat="caster in contact_list | unique:'t_id' | filter:query track by $index">
             </div>
     
                

@@ -22,7 +22,7 @@
 
 
           <ion-list>
-              <div ng-include="'components/member.html'" ng-repeat="caster in chat.members">
+              <div ng-include="'components/member.html'" ng-repeat="caster in chat.members track by $index">
               </div>                   
           </ion-list>
         
