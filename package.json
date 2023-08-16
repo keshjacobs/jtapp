@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "uglify": "node scripts/uglify.js"
-  },  
+  },
   "dependencies": {
     "@admob-plus/ionic": "^1.7.0",
     "@awesome-cordova-plugins/diagnostic": "^5.41.0",
@@ -182,10 +182,39 @@
         "KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE": "NO"
       },
       "cordova-plugin-audiotoggle": {},
+      "cordova-plugin-music-controls2": {},
+      "cordova-plugin-nativeaudio": {},
+      "cordova-plugin-media-controls": {},
+      "cordova-admob-sdk": {
+        "PLAY_SERVICES_VERSION": "18.0.0"
+      },
+      "cordova-plugin-firebasex": {
+        "FIREBASE_ANALYTICS_COLLECTION_ENABLED": "true",
+        "FIREBASE_PERFORMANCE_COLLECTION_ENABLED": "true",
+        "FIREBASE_CRASHLYTICS_COLLECTION_ENABLED": "true",
+        "ANDROID_ICON_ACCENT": "#FF00FFFF",
+        "ANDROID_FIREBASE_PERFORMANCE_MONITORING": "false",
+        "ANDROID_PLAY_SERVICES_TAGMANAGER_VERSION": "17.0.0",
+        "ANDROID_PLAY_SERVICES_AUTH_VERSION": "18.1.0",
+        "ANDROID_FIREBASE_ANALYTICS_VERSION": "17.5.0",
+        "ANDROID_FIREBASE_MESSAGING_VERSION": "20.3.0",
+        "ANDROID_FIREBASE_CONFIG_VERSION": "19.2.0",
+        "ANDROID_FIREBASE_PERF_VERSION": "19.0.9",
+        "ANDROID_FIREBASE_AUTH_VERSION": "19.4.0",
+        "ANDROID_FIREBASE_INAPPMESSAGING_VERSION": "19.1.1",
+        "ANDROID_FIREBASE_FIRESTORE_VERSION": "21.7.0",
+        "ANDROID_FIREBASE_CRASHLYTICS_VERSION": "17.2.2",
+        "ANDROID_FIREBASE_CRASHLYTICS_NDK_VERSION": "17.2.2",
+        "ANDROID_GSON_VERSION": "2.8.6",
+        "ANDROID_FIREBASE_PERF_GRADLE_PLUGIN_VERSION": "1.3.1"
+      },
+      "cordova-plugin-admob-free": {
+        "ADMOB_APP_ID": "ca-app-pub-8004122002631398~8860479029"
+      },
       "cordova-android-play-services-gradle-release": {
-        "PLAY-SERVICES-ADS": "18.0.0",
+        "PLAY-SERVICES-ADS": "19.4.0",
         "PLAY-SERVICES-ADS-IDENTIFIER": "17.0.0",
-        "PLAY-SERVICES-ADS-LITE": "18.0.0",
+        "PLAY-SERVICES-ADS-LITE": "19.4.0",
         "PLAY-SERVICES-AFS-NATIVE": "17.0.0",
         "PLAY-SERVICES-ANALYTICS": "17.0.0",
         "PLAY-SERVICES-ANALYTICS-IMPL": "17.0.0",
@@ -235,35 +264,6 @@
         "PLAY-SERVICES-VISION-IMAGE-LABEL": "18.0.0",
         "PLAY-SERVICES-WALLET": "17.0.0",
         "PLAY-SERVICES-WEARABLE": "17.0.0"
-      },
-      "cordova-plugin-music-controls2": {},
-      "cordova-plugin-nativeaudio": {},
-      "cordova-plugin-media-controls": {},
-      "cordova-admob-sdk": {
-        "PLAY_SERVICES_VERSION": "18.0.0"
-      },
-      "cordova-plugin-firebasex": {
-        "FIREBASE_ANALYTICS_COLLECTION_ENABLED": "true",
-        "FIREBASE_PERFORMANCE_COLLECTION_ENABLED": "true",
-        "FIREBASE_CRASHLYTICS_COLLECTION_ENABLED": "true",
-        "ANDROID_ICON_ACCENT": "#FF00FFFF",
-        "ANDROID_FIREBASE_PERFORMANCE_MONITORING": "false",
-        "ANDROID_PLAY_SERVICES_TAGMANAGER_VERSION": "17.0.0",
-        "ANDROID_PLAY_SERVICES_AUTH_VERSION": "18.1.0",
-        "ANDROID_FIREBASE_ANALYTICS_VERSION": "17.5.0",
-        "ANDROID_FIREBASE_MESSAGING_VERSION": "20.3.0",
-        "ANDROID_FIREBASE_CONFIG_VERSION": "19.2.0",
-        "ANDROID_FIREBASE_PERF_VERSION": "19.0.9",
-        "ANDROID_FIREBASE_AUTH_VERSION": "19.4.0",
-        "ANDROID_FIREBASE_INAPPMESSAGING_VERSION": "19.1.1",
-        "ANDROID_FIREBASE_FIRESTORE_VERSION": "21.7.0",
-        "ANDROID_FIREBASE_CRASHLYTICS_VERSION": "17.2.2",
-        "ANDROID_FIREBASE_CRASHLYTICS_NDK_VERSION": "17.2.2",
-        "ANDROID_GSON_VERSION": "2.8.6",
-        "ANDROID_FIREBASE_PERF_GRADLE_PLUGIN_VERSION": "1.3.1"
-      },
-      "cordova-plugin-admob-free": {
-        "ADMOB_APP_ID": "ca-app-pub-8004122002631398~8860479029"
       }
     },
     "platforms": [
