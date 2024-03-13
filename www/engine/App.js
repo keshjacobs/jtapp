@@ -1,4 +1,4 @@
-const app=angular.module('justtalk', ['ionic','ngCordova','ngAnimate','ionic.native','lazy-scroll','ngStorage','ngFileUpload','ionic-segment'])
+const app=angular.module('justtalk', ['ionic','ngCordova','ngAnimate','ionic.native','lazy-scroll','ngStorage','ngFileUpload','plgn.ionic-segment'])
 .constant('Config', {  
     live:'https://justtalkapp.com/',
     API:'https://api.justtalkapp.com/user/',

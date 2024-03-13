@@ -19,7 +19,6 @@
  *
 */
 
-
 var channel = require('cordova/channel');
 var platform = require('cordova/platform');
 
