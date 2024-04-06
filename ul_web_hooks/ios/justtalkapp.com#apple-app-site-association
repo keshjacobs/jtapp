@@ -3,7 +3,7 @@
     "apps": [],
     "details": [
       {
-        "appID": "<YOUR_TEAM_ID_FROM_MEMBER_CENTER>.com.ios.stickman",
+        "appID": "<YOUR_TEAM_ID_FROM_MEMBER_CENTER>.com.something.ganik.justtalk",
         "paths": [
           "*",
           "/"

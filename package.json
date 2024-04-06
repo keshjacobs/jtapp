@@ -1,7 +1,7 @@
 {
   "name": "justtalk",
   "version": "2.9.1",
-  "description": "listen to podcasts and join the conversation",
+  "description": "Listen to podcasts and join the conversation",
   "author": "Kesh Jacobs",
   "homepage": "https://justtalkapp.com/",
   "private": true,
@@ -9,6 +9,7 @@
     "uglify": "node scripts/uglify.js"
   },
   "dependencies": {
+    "@ionic/angular": "^5.9.1",
     "bluebird": "^3.7.2",
     "cordova": "^10.0.0",
     "cordova-android-play-services-gradle-release": "^4.0.0",
@@ -23,7 +24,6 @@
     "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-file-transfer": "^1.7.1",
     "cordova-plugin-filepath": "^1.5.8",
-    "cordova-plugin-firebasex": "latest",
     "cordova-plugin-geolocation": "^4.1.0",
     "cordova-plugin-inappbrowser": "^4.1.0",
     "cordova-plugin-ionic-webview": "^5.0.0",
@@ -38,13 +38,8 @@
     "es6-promise-plugin": "^4.2.2",
     "feather-icons": "^4.29.0",
     "ionic": "^5.4.16",
-    "ionic-angular": "^3.9.10",
-    "ionic-native": "^2.9.0",
-    "ionic-plugin-deeplinks": "^1.0.22",
     "ionicons": "^5.4.0",
     "moment": "^2.29.1",
-    "ng-cordova": "^0.1.27-alpha",
-    "npm": "^6.14.15",
     "rxjs": "^6.6.3",
     "update-notifier": "^5.1.0",
     "xml-js": "^1.6.11"
@@ -56,8 +51,7 @@
     "cordova-android": "^10.1.2",
     "cordova-android-firebase-gradle-release": "^4.0.0",
     "cordova-android-play-services-gradle-release": "^4.0.0",
-    "cordova-browser": "^6.0.0",
-    "cordova-ios": "^6.2.0",
+    "cordova-ios": "^7.1.0",
     "cordova-opentok-android-permissions": "^1.0.1",
     "cordova-plugin-admob-free": "^0.27.0",
     "cordova-plugin-advanced-background-mode": "^1.1.1",
@@ -69,6 +63,7 @@
     "cordova-plugin-cocoapod-support": "^1.6.2",
     "cordova-plugin-compat": "^1.2.0",
     "cordova-plugin-file-transfer": "git+https://github.com/sitewaerts/cordova-plugin-file-transfer.git",
+    "cordova-plugin-firebasex": "^16.4.0",
     "cordova-plugin-ionic-webview": "^5.0.0",
     "cordova-plugin-media": "^6.1.0",
     "cordova-plugin-media-control": "^1.0.5",
@@ -257,8 +252,8 @@
     },
     "platforms": [
       "browser",
-      "ios",
-      "android"
+      "android",
+      "ios"
     ]
   }
 }
