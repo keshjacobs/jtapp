@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.ios.stickman" version="3.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.something.ganik.justtalk" version="3.1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>JustTalk</name>
     <description>
      Keep the conversation going
@@ -32,7 +32,7 @@
     <preference name="Orientation" value="portrait" />
     <preference name="EnableViewportScale" value="false" />
     <preference name="GradlePluginGoogleServicesEnabled" value="true" />
-    <preference name="GradlePluginGoogleServicesVersion" value="4.3.10" />
+    <preference name="GradlePluginGoogleServicesVersion" value="4.3.14" />
     <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root" />
     <preference name="webviewbounce" value="false" />
     <preference name="AndroidLaunchMode" value="singleInstance" />
@@ -64,7 +64,8 @@
     <preference name="AllowInlineMediaPlayback" value="true" />
     <preference name="GradlePluginKotlinEnabled" value="true" />
     <preference name="GradlePluginKotlinCodeStyle" value="official" />
-    <preference name="GradlePluginKotlinVersion" value="1.3.50" />
+    <preference name="GradlePluginKotlinVersion" value="1.6.20" />
+    <preference name="AndroidGradlePluginVersion" value="7.3.1" />
     <preference name="NavigationBarBackgroundColor" value="#290000" />
     <preference name="NavigationBarLight" value="true" />
     <preference name="WKWebViewOnly" value="true" />
@@ -91,9 +92,9 @@
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
             <application android:usesCleartextTraffic="true" />
         </edit-config>
-        <preference name="android-minSdkVersion" value="19" />
-        <preference name="android-targetSdkVersion" value="31" />
-        <preference name="android-compileSdkVersion" value="31" />
+        <preference name="android-minSdkVersion" value="21" />
+        <preference name="android-targetSdkVersion" value="33" />
+        <preference name="android-compileSdkVersion" value="33" />
         <config-file parent="NSLocationWhenInUseUsageDescription" target="*-Info.plist">
             <string>Your message explaining why you need location access</string>
         </config-file>
@@ -107,12 +108,12 @@
             <provider android:exported="false" />
         </edit-config>
         <preference name="AndroidXEnabled" value="true" />
+        <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
         <uses-permission name="android.permission.ACCESS_FINE_LOCATION" />
         <uses-permission name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
         <uses-permission name="android.permission.ACCESS_COARSE_LOCATION" />
         <uses-permission name="com.example.towntour.permission.MAPS_RECEIVE" />
         <uses-permission name="android.permission.ACCESS_NETWORK_STATE" />
-        <uses-permission name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
         <uses-permission name="android.permission.ACCESS_WIFI_STATE" />
         <uses-permission name="android.permission.ACCESS_MOCK_LOCATION" />
         <uses-permission name="android.permission.INTERNET" />
@@ -205,9 +206,6 @@
                 <string>applinks:justtalkapp.com</string>
             </array>
         </config-file>
-        <config-file parent="GADApplicationIdentifier" target="*-Info.plist">
-            <string>ca-app-pub-8004122002631398~8392096464</string>
-        </config-file>
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <allow-intent href="http://*/*" />
@@ -275,10 +273,6 @@
         <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="This app requires photo library access for users to set profile photo or share contents" />
         <variable name="ANDROID_SUPPORT_V4_VERSION" value="24.1.1+" />
     </plugin>
-    <plugin name="cordova-admob-sdk" spec="../plugins/cordova-admob-sdk">
-        <variable name="PLAY_SERVICES_VERSION" value="18.0.0" />
-    </plugin>
     <plugin name="cordova-plugin-statusbar" spec="git+https://github.com/apache/cordova-plugin-statusbar.git" />
     <plugin name="cordova-plugin-inappbrowser" spec="^3.2.0" />
-    <plugin name="cordova-plugin-keep-awake" spec="https://github.com/snuffy/cordova-plugin-keep-awake" />
 </widget>
