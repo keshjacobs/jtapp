@@ -47,7 +47,7 @@
   "devDependencies": {
     "@ionic/v1-toolkit": "^1.0.0",
     "bower": "^1.8.12",
-    "cordova-android": "^10.1.2",
+    "cordova-android": "^11.0.0",
     "cordova-android-play-services-gradle-release": "^4.0.0",
     "cordova-opentok-android-permissions": "^1.0.1",
     "cordova-plugin-advanced-background-mode": "^1.1.1",
@@ -61,7 +61,7 @@
     "cordova-plugin-file-transfer": "git+https://github.com/sitewaerts/cordova-plugin-file-transfer.git",
     "cordova-plugin-firebasex": "^16.5.0",
     "cordova-plugin-ionic-webview": "^5.0.0",
-    "cordova-plugin-music-controls": "^2.2.0",
+    "cordova-plugin-music-controls2": "^3.0.7",
     "cordova-plugin-nativeaudio": "^3.0.9",
     "cordova-plugin-navigationbar-color": "^0.1.0",
     "cordova-plugin-statusbar": "git+https://github.com/apache/cordova-plugin-statusbar.git",
@@ -176,8 +176,8 @@
         "PLAY-SERVICES-WALLET": "17.0.0",
         "PLAY-SERVICES-WEARABLE": "17.0.0"
       },
-      "cordova-plugin-music-controls": {},
-      "cordova-plugin-firebasex": {}
+      "cordova-plugin-firebasex": {},
+      "cordova-plugin-music-controls2": {}
     },
     "platforms": [
       "browser",
