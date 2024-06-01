@@ -9,6 +9,5 @@ app.controller('splash', function($timeout,$state,$rootScope){
                 $state.go("front.talk");
             }
         }
-        $rootScope.play_sound("splash.wav");
     },4000);
 });
